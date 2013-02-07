@@ -16,6 +16,7 @@
 *.ilk
 *.log
 *_Spliced.*proj
+*.suo
 [Bb]in
 [Dd]ebug*/
 *.lib
