@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="d918e712-83ac-4f44-8931-757664d20ce7" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>In this chapter we discuss matrix factorizations and solving linear equations. <application>Fmat</application> supports 4 factorizations:</para>
+      
+		<list class="bullet">
+		  <listItem><para>Cholesky</para></listItem>
+		  <listItem><para>LU</para></listItem>
+		  <listItem><para>QR</para></listItem>		
+		  <listItem><para>Singular Value</para></listItem>		
+		</list>      
+      
+      
+  	<alert class="note">
+	  <para>All code examples below use double precision <application>Matrix</application> type. The same functions would work in single precision.</para>
+	</alert>
+	
+
+     
+    </introduction>
+
+    <section address="Section1">
+      <title>Cholesky factorization</title>
+      <content>
+        <para>Cholesky requires positive definite matrix A. Result is upper matrix U: A = U.T * U. You can also solve linear equation A*x = b:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.LinearAlgebra
+        let a = Matrix([3;3], [2.0;0.7;0.7;0.7;2.0;0.7;0.7;0.7;2.0])
+        let u = chol(a)
+        let inv = cholInv(a) // inverse matrix using cholesky factorization
+        let b = Matrix([1.;2.;3.])
+        let x = cholSolve(a, b) // solves ax=b
+        </code>
+        </example>          
+      </content>
+    </section>
+    
+    <section address="Section1">
+      <title>LU factorization</title>
+      <content>
+        <para>LU decomposes matrix A into lower and upper matrix: A = P*L*U where P is row permutation matrix. You can also solve linear equation A*x = b:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.LinearAlgebra
+        let a = Matrix([3;3], [2.0;0.7;0.7;0.7;2.0;0.7;0.7;0.7;2.0])
+        let (l, u, p) = lu(a) // p is int array with row permutations
+        let inv = luInv(a) // inverse matrix using LU factorization
+        let b = Matrix([1.;2.;3.])
+        let x = luSolve(a, b) // solves ax=b
+        </code>
+        </example>          
+      </content>
+    </section>
+    
+    <section address="Section1">
+      <title>QR factorization</title>
+      <content>
+        <para>QR decomposes matrix A [mxn] into orthogonal Q and upper triangular R: A = Q*R. m > n and economy decomposition is performed so that Q has n columns and R has n rows. You can use it to solve linear least squares problems as well as compute effective rank for given numerical tolerance:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.LinearAlgebra
+        let a = Matrix([4;3], [2.0..13.0])
+        let (q, r) = qr(a)
+        let b = Matrix([4;2], [1.0..8.0])
+        let x = qrSolveFull(a, b) // assumes "a" has full rank
+        let (x, rank) = qrSolve(a, b, 1e-20) // numerical tolerance is used to compute effective rank
+        </code>
+        </example>          
+      </content>
+    </section>
+    
+     <section address="Section1">
+      <title>Singular value factorization</title>
+      <content>
+        <para>Singular value factorization decomposes matrix A [mxn] into diagonal S and unitary U and V: A = U * S * V.T. m > n and economy decomposition is performed so that U has n columns. You can use it to solve linear least squares problems:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.LinearAlgebra
+        let a = Matrix([3;3], [2.0;0.7;0.7;0.7;2.0;0.7;0.7;0.7;2.0])
+        let b = Matrix([2;2], [1.0..4.0])
+        let (u, s, vt) = svd(a) //U = u, s is vector of singular values: S = diag(s, 0), vt = V.T
+        let x = svdSolve(a, b, 1e-20) // tolerance determines effective rank
+        let vals = svdValues(a) // singular values
+        </code>
+        </example>          
+      </content>
+    </section>  
+   
+    
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b073e082-18f9-47e6-a1d5-34e0d0fe23fe" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para><application>Welcome to Fmat!</application></para>
+      <para><application>Fmat</application> is a F# numerical library. It contains F# types and functions which will allow you to manipulate generic multidimensional dense matrices as well as generate random numbers, factorize matrices and solve linear equations. Fmat is 100% F# and it is organized into the following namespaces and modules:</para>
+	<table>
+	  <tableHeader>
+	    <row>
+	      <entry><para>Namespace</para></entry>
+	      <entry><para>Description</para></entry>
+	    </row>
+	  </tableHeader>
+	  <row>
+	    <entry><para><application>Fmat.Numerics</application></para></entry>
+	    <entry><para>Contains generic matrix types: <application>Matrix&lt;'T,'S&gt;></application> where 'T is type of matrix elements and 'S defines matrix operations. A few concrete matrix types are predefined: <application>Matrix</application> for double precision float, <application>Matrix32</application> for single precision float, <application>IntMatrix</application>, <application>BoolMatrix</application> and <application>StringMatrix</application>.</para></entry>
+	  </row>
+	  <row>
+	    <entry><para><application>Fmat.Numerics.GenericMatrixFunctions</application></para></entry>
+	    <entry><para>This module contains various generic functions which take as input <application>Matrix&lt;'T,'S&gt;></application> instances, e.g. <quoteInline>repmat(x)</quoteInline></para></entry>
+	  </row>
+	  <row>
+	    <entry><para><application>Fmat.Numerics.GenericBasicStat</application></para></entry>
+	    <entry><para>Contains generic basic stat functions and random number generators, e.g. <quoteInline>rand [2;2]</quoteInline> and <quoteInline>mean(x,1)</quoteInline></para></entry>
+	  </row>	   
+	  <row>
+	    <entry><para><application>Fmat.Numerics.GenericLinearAlgebra</application></para></entry>
+	    <entry><para>Contains generic functions for matrix factorization and linear solvers e.g. <quoteInline>chol(x)</quoteInline></para></entry>
+	  </row>	
+	  <row>
+	    <entry><para><application>Fmat.Numerics.MatrixFunctions</application></para></entry>
+	    <entry><para>This module is a non generic double precision float version of <quoteInline>GenericMatrixFunctions</quoteInline></para></entry>
+	  </row>
+	  <row>
+	    <entry><para><application>Fmat.Numerics.BasicStat</application></para></entry>
+	    <entry><para>This module is a non generic double precision float version of <quoteInline>GenericBasicStat</quoteInline></para></entry>
+	  </row>	   
+	  <row>
+	    <entry><para><application>Fmat.Numerics.LinearAlgebra</application></para></entry>
+	    <entry><para>This module is a non generic double precision float version of <quoteInline>GenericLinearAlgebra</quoteInline></para></entry>
+	  </row>	
+	  <row>
+	    <entry><para><application>Fmat.Numerics.Matrix32Functions</application></para></entry>
+	    <entry><para>This module is a non generic single precision float version of <quoteInline>GenericMatrixFunctions</quoteInline></para></entry>
+	  </row>
+	  <row>
+	    <entry><para><application>Fmat.Numerics.BasicStat32</application></para></entry>
+	    <entry><para>This module is a non generic single precision float version of <quoteInline>GenericBasicStat</quoteInline></para></entry>
+	  </row>	   
+	  <row>
+	    <entry><para><application>Fmat.Numerics.LinearAlgebra32</application></para></entry>
+	    <entry><para>This module is a non generic single precision float version of <quoteInline>GenericLinearAlgebra</quoteInline></para></entry>
+	  </row>	
+	</table>
+	<para><application>Fmat</application> is an unoptimized, open source version of <externalLink>
+<linkText>FCore</linkText>
+<linkAlternateText>FCore</linkAlternateText>
+<linkUri>http://statfactory.co.uk</linkUri>
+<linkTarget>_blank</linkTarget>
+</externalLink>
+, developed by Statfactory Ltd.
+	
+	</para>
+      
+	<para>F# is an open source language which runs on .NET and Mono platforms. It is a multi-paradigm language which combines both functional and object oriented programming. Many of its features, e.g. type inference and rich operator overloading, make it perfect for numerical applications.</para>
+	<para>For more information about F# follow this link:</para>
+	
+<list class="bullet">
+  <listItem><para>
+  		          <externalLink>
+			          <linkText>Microsoft F# Software Foundation</linkText>
+			          <linkAlternateText>F# Software Foundation</linkAlternateText>
+			          <linkUri>http://fsharp.org/</linkUri>
+		          </externalLink>
+  </para></listItem>
+</list>
+
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

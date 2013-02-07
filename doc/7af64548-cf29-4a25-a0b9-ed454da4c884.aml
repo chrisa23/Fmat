@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="7af64548-cf29-4a25-a0b9-ed454da4c884" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>This library guide contains information about how to use the library in your projects, including many F# code samples. It consists of the following chapters:
+      </para>
+      
+	<list class="bullet">
+	  <listItem><para><link xlink:href="f949d05e-fb76-43da-9645-7dd9aadc1488">Multidimensional Dense Matrix</link></para></listItem>
+	  <listItem><para><link xlink:href="d918e712-83ac-4f44-8931-757664d20ce7">Matrix Factorizations and Linear Equations</link></para></listItem>
+	  
+      <listItem><para><link xlink:href="51b8aca5-19d5-4996-8ca2-c77b134d3f96">Vector Functions</link></para></listItem>	 
+      
+      <listItem><para><link xlink:href="6c5c888d-8d57-4aea-9dfe-a68c99a51888">Random Number Generation</link></para></listItem>	
+      <listItem><para><link xlink:href="81a1656a-865b-4aa8-9069-f6fa99b0ecf1">Summary Statistics</link></para></listItem>
+	</list>
+	
+    </introduction>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="dcca28a4-140d-4401-b5b3-e1f51126b972" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>In this chapter we discuss how to manipulate matrix data and/or matrix size using various functions and matrix instance methods.</para>
+    </introduction>
+    
+	<alert class="note">
+	  <para>All code examples below use <application>Matrix</application> type based on float, but they would work in generic case as well.</para>
+	</alert>
+
+    <section address="Section1">
+      <title>Matrix manipulation with matrix instance methods</title>
+      <content>
+        <para>These methods operate on matrix instance and can change its properties/data.</para>
+        
+		<definitionTable>
+		  <definedTerm>Transpose</definedTerm>
+		  <definition><para>Transposes matrix in place</para></definition>
+		  <definedTerm>Reshape</definedTerm>
+		  <definition><para>Redefines matrix dimensions without changing its data</para></definition>	
+		  <definedTerm>ApplyFun</definedTerm>
+		  <definition><para>Applies user F# function to each matrix element</para></definition>	
+		</definitionTable>
+		
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m1 = ones [3;4] 
+        m1.Transpose() // m1 becomes 4x3
+        let m2 = ones [3;4]
+        m2.Reshape([3;2;2]) // m2 becomes 3x2x2, data does not change, new size must hold the same number of elements: 3*4=3*2*2 
+        let m3 = ones [2;1;3;1;4]
+        m1.ApplyFun(x -&gt; x * 2.0) // multiply each element by 2
+        </code>
+        </example>  		
+		
+      </content>
+    </section>
+    
+     <section address="Section1">
+      <title>Matrix manipulation with F# functions</title>
+      <content>
+        <para>These functions return new matrix. Matrix input arguments are not affected.</para>
+	<alert class="note">
+	  <para>For each of those functions there is also a corresponding Matrix static method, e.g. <quoteInline>Matrix.triL</quoteInline></para>
+	</alert>
+        
+		<definitionTable>
+		  <definedTerm>diag</definedTerm>
+		  <definition><para>Creates diagonal matrix from a vector</para></definition>
+		  <definedTerm>triL</definedTerm>
+		  <definition><para>Returns lower triangular matrix</para></definition>
+		  <definedTerm>triU</definedTerm>
+		  <definition><para>Returns upper triangular matrix</para></definition>		  
+		  <definedTerm>concat</definedTerm>
+		  <definition><para>Concatenates matrices along given dimension</para></definition>			
+		  <definedTerm>horzConcat</definedTerm>
+		  <definition><para>Concatenates matrices horizontally. Equivalent to <quoteInline>concat</quoteInline> along dimension 1</para></definition>	
+		  <definedTerm>vertConcat</definedTerm>
+		  <definition><para>Concatenates matrices vertically. Equivalent to <quoteInline>concat</quoteInline> along dimension 0</para></definition>	
+		  <definedTerm>repmat</definedTerm>
+		  <definition><para>Replicates matrix independently in each dimension</para></definition>		
+		  <definedTerm>reshape</definedTerm>
+		  <definition><para>Redefines matrix dimensions. Data copied to new matrix</para></definition>		
+		  <definedTerm>transpose</definedTerm>
+		  <definition><para>Transposes matrix, returns new matrix</para></definition>		
+		  <definedTerm>applyFun</definedTerm>
+		  <definition><para>Applies user F# function to each element of input matrix, returns new matrix</para></definition>	
+		  <definedTerm>applyFun2Arg</definedTerm>
+		  <definition><para>Applies user F# function to 2 input matrices elementwise, returns new matrix</para></definition>	
+		  <definedTerm>applyFun3Arg</definedTerm>
+		  <definition><para>Applies user F# function to 3 input matrices elementwise, returns new matrix</para></definition>
+
+		</definitionTable>
+		
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m1 = diag(Matrix([1.;2.;3.])) // 1 2 3  on main diagonal, zero otherwise
+        let m2 = ones [3;4]
+        let m3 = triL(m2, 1) // lower tringular up to 1 above main diagonal
+        let m4 = triU(m2, -1) // upper tringular down to 1 below main diagonal
+        let m5 = ones [2;3;4]
+        let m6 = ones [2;4;4]
+        let m7 = concat( [m5;m6], 1) // concat along dimension 1, returns 2x7x4, dimensions other than 1 must be equal
+        let m8 = repmat(m2, [2;3;2]) // replicate matrix m2 twice along dim 0 then 3 times along dim 1 and twice along dim 2. Returns matrix 6x12x2
+        let m9 = reshape(m2, [2x2x3]) // new size must hold the same number of elements: 3*4=2*2*3
+        let m10 = transpose(m2) // returns 4x3
+        let m11 = applyFun(m1, fun x -&gt; x * 2.0) //multiply each element by 2 and return as new matrix
+        let m12 = applyFun2Arg(m1, m1, fun (x,y) -&gt; x + y) // same as m1 + m1
+        </code>
+        </example>  		
+      </content>
+    </section>
+  </developerConceptualDocument>
+</topic>

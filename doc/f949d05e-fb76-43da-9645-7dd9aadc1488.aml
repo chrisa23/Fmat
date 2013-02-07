@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="f949d05e-fb76-43da-9645-7dd9aadc1488" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>At the centre of Fmat library lies a dense generic matrix types which allows you to manipulate multidimensional rectangular arrays. Each matrix has a given size which is a series of integers specifying each dimension, e.g. size [2;3] for 2D matrix with 2 rows and 3 columns. Each matrix must have at least 2 dimensions, scalars are 1x1 and vectors 1xn or nx1.</para>
+      <para>There are a few predefined concrete types which are based on generic <application>Matrix&lt;'T,'S&gt;</application>, all declared in <application>Fmat.Numerics</application> namespace:
+		 <table>
+		  <tableHeader>
+		    <row>
+		      <entry><para>Type</para></entry>
+		      <entry><para>Description</para></entry>
+		    </row>
+		  </tableHeader>
+		  <row>
+		    <entry><para>Matrix = Matrix&lt;float,FloatLib&gt;</para></entry>
+		    <entry><para>Multidimensional double precision dense matrix</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>Matrix32 = Matrix&lt;float32,Float32Lib&gt;</para></entry>
+		    <entry><para>Multidimensional single precision dense matrix</para></entry>
+		  </row>  
+		  <row>
+		    <entry><para>IntMatrix = Matrix&lt;int,IntLib&gt;</para></entry>
+		    <entry><para>Multidimensional integer dense matrix</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>BoolMatrix = Matrix&lt;bool,BoolLib&gt;</para></entry>
+		    <entry><para>Multidimensional boolean dense matrix</para></entry>
+		  </row>  
+		  <row>
+		    <entry><para>StringMatrix = Matrix&lt;string,StringLib&gt;</para></entry>
+		    <entry><para>Multidimensional string dense matrix</para></entry>
+		  </row>  
+		</table>     
+      </para>
+      
+      <para>All dense matrix types are specializations of the same generic <application>Matrix&lt;'T'S&gt;</application> type and formally support the same constructors, properties, methods and indexers. However, some operations are not possible for given matrix element type, e.g. + operator is not defined for bool values and &amp;&amp; for floating numbers. In that case the operation will throw <quoteInline>InvalidOperationException</quoteInline>.</para>
+	      
+	<list class="bullet">
+	  <listItem><para><link xlink:href="c9ec7545-2e83-46e5-ac61-358005afdea3">Construction</link> of generic matrices using both class constructors and functions</para></listItem>
+	  <listItem><para><link xlink:href="b78f1975-9a78-41b7-9499-6904d896804d">Arithmetic operators</link>, both elementwise and non elementwise, e.g. matrix multiplication. Only defined for arithmetic types</para></listItem>
+      <listItem><para><link xlink:href="a07263b1-a18c-4bad-b7e6-73c0b4b607df">Comparison operators</link>, only defined for types with <quoteInline>comparison</quoteInline> constraint.</para></listItem>	 
+      <listItem><para><link xlink:href="d478c35a-2f76-4bf5-8ff5-ed851bdee3b7">Indexing and slicing</link>, including boolean and using predictor function</para></listItem>	
+      <listItem><para><link xlink:href="dcca28a4-140d-4401-b5b3-e1f51126b972">Matrix manipulation</link> using various generic functions, e.g. <quoteInline>repmat</quoteInline> to replicate matrix in each dimension</para></listItem>	      
+	
+	</list>
+
+    </introduction>
+    
+     <section address="Section1">
+      <title>Matrix properties</title>
+      <content>
+        <para>Each matrix has the following properties:</para>
+        
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Property</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+    <entry><para>Size</para></entry>
+    <entry><para>Array of integers, specifies matrix dimensions</para></entry>
+  </row>
+  <row>
+    <entry><para>Length</para></entry>
+    <entry><para>Total number of elements</para></entry>
+  </row>  
+  <row>
+    <entry><para>NDims</para></entry>
+    <entry><para>Number of dimensions</para></entry>
+  </row>      
+  <row>
+    <entry><para>Empty</para></entry>
+    <entry><para>Static property, returns only instance of empty matrix</para></entry>
+  </row>   
+  <row>
+    <entry><para>Data</para></entry>
+    <entry><para>Object holding matrix data.</para></entry>
+  </row>  
+  <row>
+    <entry><para>Diag() or Diag(offset)</para></entry>
+    <entry><para>For 2D matrices only, returns main or offset diagonal in new matrix instance.</para></entry>
+  </row>  
+  <row>
+    <entry><para>DisplayFormat</para></entry>
+    <entry><para>Static property used to specify format which is applied to each matrix element when <quoteInline>ToString()</quoteInline> is called</para></entry>
+  </row>  
+  <row>
+    <entry><para>DisplayDigits</para></entry>
+    <entry><para>Static property, sets number of digits to be displayed, does not affect matrix calculations.</para></entry>
+  </row>  
+  <row>
+    <entry><para>MaxDisplaySize</para></entry>
+    <entry><para>Static property used to specify max number of elements in each matrix dimension to be shown when <quoteInline>ToString()</quoteInline> is called</para></entry>
+  </row>  
+</table>
+
+    <example>
+    <code lang="F#">
+    open Fmat.Numerics
+    open Fmat.Numerics.MatrixFunctions
+    let x = ones [2;3;4]
+    let size = x.Size // [|2;3;4|]
+    let l = x.Length // 24
+    let d = x.NDims // 3
+    let isEmpty = x == Matrix.Empty // false
+    Matrix.DisplayFormat &lt;- "G3"
+    Matrix.DisplayDigits &lt;- 4 // same as setting DisplayFormat to "G4"
+    Matrix.MaxDisplaySize &lt;- [|3;4|] // show max 3 rows, 4 columns, for higher dimensions limit to 4
+    
+    </code>
+    </example>          
+      </content>
+    </section>  
+    
+    
+    <section address="Section1">
+      <title>Matrix utility methods and casts</title>
+      <content>
+        
+
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Method</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+    <entry><para>ToString()</para></entry>
+    <entry><para>Returns up to <quoteInline>Matrix.MaxDisplaySize</quoteInline> rows/columns/pages/... formatted by <quoteInline>Matrix.DisplayFormat</quoteInline></para></entry>
+  </row>
+  <row>
+    <entry><para>ToColMajorSeq()</para></entry>
+    <entry><para>Returns sequence of matrix elements in column major order. All predefined matrix types keep data internally in column major order.</para></entry>
+  </row>  
+  <row>
+    <entry><para>Explicit cast to 'T</para></entry>
+    <entry><para>Converts scalar matrix to value of type 'T, exception if not scalar matrix</para></entry>
+  </row>    
+  <row>
+    <entry><para>Explicit cast to 'T[]</para></entry>
+    <entry><para>Converts 2D matrix 1xn or nx1 to value of type 'T[], exception if not vector shape</para></entry>
+  </row> 
+  <row>
+    <entry><para>Explicit cast to 'T[,]</para></entry>
+    <entry><para>Converts 2D matrix to value of type 'T[,], exception if not 2D matrix</para></entry>
+  </row> 
+  <row>
+    <entry><para>Explicit cast to 'T[,,]</para></entry>
+    <entry><para>Converts 3D matrix to value of type 'T[,,], exception if not 3D matrix</para></entry>
+  </row> 
+  <row>
+    <entry><para>Explicit cast to 'T[,,,]</para></entry>
+    <entry><para>Converts 4D matrix to value of type 'T[,,,], exception if not 4D matrix</para></entry>
+  </row> 
+</table>
+
+		
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m1 = Matrix([2;3], {1.0..6.0})
+        let s = m1.ToString()
+        //returns
+        //1.00 3.00 5.00
+        //2.00 4.00 6.00
+        let arr = m1.ToColMajorSeq() // returns F# seq&lt;float&gt;: seq{1.0..6.0}
+        let x = float(Matrix(1.0)) // explicit cast to float, returns 1.0
+        </code>
+        </example>  		
+		
+      </content>
+    </section>    
+  </developerConceptualDocument>
+</topic>

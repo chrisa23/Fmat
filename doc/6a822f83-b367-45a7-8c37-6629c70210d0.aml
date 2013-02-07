@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6a822f83-b367-45a7-8c37-6629c70210d0" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>FCore allows you to control at runtime some matrix behavior via its static class <application>MatrixOptions</application></para>
+      
+      <para>The following options are available as <application>MatrixOptions</application> properties:</para>
+      
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Property</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader> 
+  <row>
+    <entry><para>DisplayDigits</para></entry>
+    <entry><para>Number of characters to be used when displaying matrix elements via ToString(). Default is 2</para></entry>
+  </row>    
+  <row>
+    <entry><para>MaxDisplaySize</para></entry>
+    <entry><para>Max number of rows/columns/pages to display when calling ToString(). Default is 10</para></entry>
+  </row>   
+</table>      
+
+
+    <example>
+    <code lang="F#">
+    open FCore.Numerics
+    open FCore.Numerics.MatrixFunctions
+    let x = rand [150;150] : Matrix
+    MatrixOptions.DisplayDigits &lt;- 4
+    x.ToString()
+    </code>
+    </example>         
+    </introduction>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="51b8aca5-19d5-4996-8ca2-c77b134d3f96" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>Vector functions take as argument a matrix and apply given function elementwise. Matrix dimensions do not change and new instance is returned.</para>
+
+	<table>
+	  <tableHeader>
+	    <row>
+	      <entry><para>Function</para></entry>
+	     
+	      <entry><para>Description</para></entry>
+	    </row>
+	  </tableHeader>
+	  <row>
+	    <entry><para>abs</para></entry>
+	   
+	    <entry><para>calculates absolute value</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>sqrt</para></entry>
+	   
+	    <entry><para>calculates square root</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>exp</para></entry>
+	   
+	    <entry><para>calculates exponential</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>log</para></entry>
+	   
+	    <entry><para>calculates natural logarithm</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>log10</para></entry>
+	   
+	    <entry><para>calculates base 10 logarithm</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>cos</para></entry>
+	    
+	    <entry><para>calculates cosine</para></entry>
+	  </row>	
+	  <row>
+	    <entry><para>sin</para></entry>
+	    
+	    <entry><para>calculates sine</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>tan</para></entry>
+	   
+	    <entry><para>calculates tangent</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>acos</para></entry>
+	    
+	    <entry><para>calculates inverse cosine</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>asin</para></entry>
+	   
+	    <entry><para>calculates inverse sine</para></entry>
+	  </row>	
+	  
+	  <row>
+	    <entry><para>atan</para></entry>
+	   
+	    <entry><para>calculates inverse tangent</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>cosh</para></entry>
+	   
+	    <entry><para>calculates hyperbolic cosine</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>sinh</para></entry>
+	   
+	    <entry><para>calculates hyperbolic sine</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>tanh</para></entry>
+	   
+	    <entry><para>calculates hyperbolic tangent</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>erf</para></entry>
+	    <entry><para>calculates error function</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>erfc</para></entry>
+	    <entry><para>calculates complementary error function</para></entry>
+	  </row>
+	  <row>
+	    <entry><para>erfinv</para></entry>
+	    <entry><para>calculates inverse error function</para></entry>
+	  </row>	
+	  <row>
+	    <entry><para>erfcinv</para></entry>
+	    <entry><para>calculates inverse complementary error function</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>normcdf</para></entry>
+	    <entry><para>calculates standard normal cumulative distribution function</para></entry>
+	  </row>		  
+	  <row>
+	    <entry><para>norminv</para></entry>
+	    <entry><para>calculates inverse standard normal cumulative distribution function</para></entry>
+	  </row>		  
+	  <row>
+	    <entry><para>ceil</para></entry>
+	    <entry><para>rounds to integer value towards plus infinity</para></entry>
+	  </row>	
+	  <row>
+	    <entry><para>round</para></entry>
+	    <entry><para>rounds to nearest integer</para></entry>
+	  </row>	  
+	  <row>
+	    <entry><para>minXY</para></entry>
+	    <entry><para>calculates minimum of 2 arguments</para></entry>
+	  </row>	
+	  <row>
+	    <entry><para>maxXY</para></entry>
+	    <entry><para>calculates maximum of 2 arguments</para></entry>
+	  </row>	
+	</table>
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m = ones [2;3] 
+        let z = sqrt(m) // pass matrix, returns matrix 2x3
+        </code>
+        </example>  	
+        
+    </introduction>
+  </developerConceptualDocument>
+</topic>

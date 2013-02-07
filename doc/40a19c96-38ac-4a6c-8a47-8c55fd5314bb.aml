@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="40a19c96-38ac-4a6c-8a47-8c55fd5314bb" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>F# Interactive (fsi.exe) is used to run F# code interactively at the console, or to execute F# scripts. It allows you to run F# code in REPL (Read, Evaluate, Print Loop), in other words you can type some code, run it and see the result.</para>
+    </introduction>
+
+    <section address="Section1">
+      <title>Using Fmat in F# Interactive console</title>
+      <content>
+        <para>To start F# Interactive console you must run fsi.exe. It is part of F# installation and normally can be found in <quoteInline>C:\Program Files\Microsoft F#\v4.0\fsi.exe</quoteInline></para>
+        
+        <para>Before you can access FCore functions you must reference FCore dlls, e.g.:</para>
+      
+        <para> <application>#r @"&lt;YourFCoreFolder&gt;\FCore.Numerics.dll"</application></para>    
+        <para> <application>open FCore.Numerics</application></para> 
+        <para> <application>open FCore.Numerics.MatrixFunctions</application></para>
+        <para> <application>open FCore.Numerics.BasicStat</application></para> 
+        <para> <application>open FCore.Numerics.LinearAlgebra</application></para> 
+
+      <para>Now you can access FCore functions:</para>
+      
+    <example>
+    <code lang="F#">
+    let r = Matrix([2.0;3.0])
+    let x = rand [1;2] + r;;
+    </code>
+    </example>    
+    
+    
+	<alert class="note">
+	  <para>Enter ";;" at the end of statement to force evaluation and see the result.</para>
+	</alert>
+
+      </content>
+     
+    </section>
+    
+  
+    <section address="Section1">
+      <title>Using FCore in F# Interactive within VS2010 or VS2010 Shell</title>
+      <content>
+        
+        <para>Create a new F# project and add a F# script file to it. Scripts have extension ".fsx". Type in the script file:</para>
+        
+        <para> <application>#r @"&lt;YourFCoreFolder&gt;\FCore.Numerics.dll"</application></para>      
+        <para> <application>open FCore.Numerics</application></para> 
+        <para> <application>open FCore.Numerics.MatrixFunctions</application></para>
+        <para> <application>open FCore.Numerics.BasicStat</application></para> 
+        <para> <application>open FCore.Numerics.LinearAlgebra</application></para> 
+          
+   
+
+      <para>Now you can access FCore functions. Right click and "Send to Interactive" to see the result:</para>
+      
+    <example>
+    <code lang="F#">
+    let r = Matrix([2.0;3.0])
+    let x = rand [1;2] + r;;
+    </code>
+    </example>    
+   
+    
+	<alert class="note">
+	  <para>Enter ";;" at the end of statement to force evaluation and see the result.</para>
+	</alert>
+
+      </content>
+     
+    </section>  
+    
+    
+    
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

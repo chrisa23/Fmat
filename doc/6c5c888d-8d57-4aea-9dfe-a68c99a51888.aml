@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6c5c888d-8d57-4aea-9dfe-a68c99a51888" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>In this chapter we discuss random number generation in <application>Fmat</application>. </para>
+      <para>Random number generation requires basic random generators, i.e. uniform distribution generators. <application>Fmat</application> contains 1 default generator based on .NET <quoteInline>Random</quoteInline></para>
+      
+
+    <para>Random number generation is controlled in <application>Fmat</application> by <quoteInline>RandStream</quoteInline> static type. <quoteInline>RandStream</quoteInline> default generator is <quoteInline>DefaultGenerator</quoteInline>. You can replace it with your own generator by implementing <quoteInline>IRandomGenerator</quoteInline> and setting it as current generator:</para>
+    
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        RandStream.Generator &lt;- (new MyGenerator(seed)):&gt;IRandomGenerator
+        </code>
+        </example> 
+        
+
+   
+   <para>Once basic generator is set you can use functions which generate numbers from given continuous or discreet distribution. Each function requires distribution parameters and size of the matrix to return. The functions are grouped in modules: generic <quoteInline>Fmat.Numerics.GenericBasicStat</quoteInline>, double precision <quoteInline>Fmat.Numerics.BasicStat</quoteInline> and single precision <quoteInline>Fmat.Numerics.BasicStat32</quoteInline>. The following distributions are available:</para>
+
+
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Function</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+    <entry><para>rand(size)</para></entry>
+    <entry><para>Uniform distribution [0,1]</para></entry>
+  </row>
+  <row>  
+    <entry><para>unifRnd(a, b, size)</para></entry>
+    <entry><para>Uniform distribution [a,b]</para></entry> 
+  </row>
+  <row>      
+    <entry><para>normRnd(mean, sigma, size)</para></entry>
+    <entry><para>Normal distribution with given mean and standard deviation</para></entry>   
+  </row>
+  <row>      
+    <entry><para>mvNormRnd(mean, cov, n)</para></entry>
+    <entry><para>Multivariate normal distribution with given mean vector and covariance matrix, returns n rows</para></entry> 
+  </row>
+  <row>      
+    <entry><para>lognormRnd(mean, sigma, a, beta, size)</para></entry>
+    <entry><para>Lognormal distribution with given mean, sigma standard deviation, displacement a and scale beta</para></entry>  
+  </row>
+  <row>     
+    <entry><para>bernRnd(p, size)</para></entry>
+    <entry><para>Bernoulli distribution with success probability p</para></entry>      
+  </row>
+  <row>     
+    <entry><para>binomRnd(n, p, size)</para></entry>
+    <entry><para>Binomial distribution with success probability p and number of trials n</para></entry>      
+  </row>       
+  <row>     
+    <entry><para>poissRnd(lambda, size)</para></entry>
+    <entry><para>Poisson distribution with given lambda</para></entry>      
+  </row>   
+</table>
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.BasicStat
+        let x = rand [2;3;4] 
+        let y = poissRnd(2.6, [2;3;4])
+        </code>
+        </example>   
+    </introduction>
+    <relatedTopics>
+
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

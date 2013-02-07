@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="a07263b1-a18c-4bad-b7e6-73c0b4b607df" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>In this chapter we discuss comparison operators: "&lt;", "&gt;", "&lt;=", "&gt;=", "=" and "!="</para>
+    </introduction>
+    
+	<alert class="note">
+	  <para>All code examples below use <application>Matrix</application> type based on <quoteInline>float</quoteInline>, but they will work on any generic type with <quoteInline>comparison</quoteInline> constraint.</para>
+	</alert>
+
+    <section address="Section1">
+      <title>Elementwise comparison operators</title>
+      <content>
+
+        <para>Elementwise operations follow "dot" convention: ".&lt;", ".&gt;", ".&lt;=", ".&gt;=", ".=", ".!=" and ".&lt;&gt;". The operator is applied to elements in the same location within a matrix, so matrices must have the same size unless one of the arguments is scalar(scalar value or scalar matrix 1x1) in which case the scalar is compared to each element of the matrix argument.</para>
+        <para>Result is a <application>__BoolMatrix</application> object, used only internally in the library, which can be passed to a special constructor of matrix of any type:</para>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = ones [2;3;4]
+        let matrix2 = ones [2;3;4]
+        let res1 = matrix1 .&lt; matrix2 // returns __BoolMatrix, used only internally to represent result of elementwise comparison
+        let res2 = matrix1 .&lt;= matrix2
+        let res3 = matrix1 .&gt; matrix2
+        let res4 = matrix1 .&gt;= matrix2
+        let res5 = matrix1 .= matrix2
+        let res6 = matrix1 .!= matrix2
+        let res6 = matrix1 .&lt;&gt; matrix2
+        let res7 = matrix1 .&lt; 2.0
+        let resMatrix = Matrix(res1) // returns matrix of float numbers, true is converted to 1 and false to 0
+        let bMatrix = BoolMatrix(res1) // creates proper BoolMatrix which supports all boolean operations
+        </code>
+        </example>          
+      </content>
+    </section>
+    
+    <section address="Section1">
+      <title>Non elementwise comparison operators</title>
+      <content>
+        <para>These operators are: "==" and "!=". They check if matrices have exactly the same size and values and return boolean values <quoteInline>true</quoteInline> or <quoteInline>false</quoteInline>. You can also check if matrix is equal to a scalar value.</para>
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = ones [2;3;4] 
+        let matrix2 = zeros [2;3;4]
+        let matrix3 = ones [2;3;4]
+        let matrix4 = ones [1;1] / scalar
+        let res1 = matrix1 == matrix3 // returns true
+        let res2 = matrix1 != matrix3 // returns false        
+        let res3 = matrix1 == matrix2 // returns false
+        let res4 = matrix1 != matrix2 // returns true 
+        let res5 = matrix4 == 1.0 // returns true
+        </code>
+        </example> 
+		<alert class="note">
+		  <para>F# operators "=" and "&lt;&gt;" can also be used but they check if matrix references are the same:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = ones [2;3;4]
+        let matrix2 = matrix1
+        let matrix3 = ones [2;3;4]
+        let res1 = matrix1 = matrix2 // same reference so true
+        let res2 = matrix1 = matrix3 // same values but different reference so returns false
+        </code>
+        </example> 		  
+		</alert>        
+      </content>
+    </section>
+    
+    
+    <section address="Section1">
+      <title><quoteInline>Compare all to scalar</quoteInline> operators</title>
+      <content>
+
+        <para><quoteInline>Compare all to scalar</quoteInline> operations follow "&amp;" convention: "&amp;&lt;", "&amp;&gt;", "&amp;&lt;=", "&amp;&gt;=", "&amp;=", "&amp;!=" and "&amp;&lt;&gt;". The operator compares each matrix element to given scalar and returns true if all comparisons are true.</para>
+    
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix = ones [2;3;4] 
+        let res = matrix &amp;= 1.0 // returns true
+        </code>
+        </example>          
+      </content>
+    </section>
+    
+  </developerConceptualDocument>
+</topic>

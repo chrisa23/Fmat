@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="81a1656a-865b-4aa8-9069-f6fa99b0ecf1" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>Summary statistics are generic functions which summarize data, e.g. calculate mean or standard deviation. They are applied to multidimensional dense matrix along a given dimension, e.g. 2D matrix can be summarized along columns (column mean) or rows (row mean). The following functions are available in <application>Fmat</application> library:</para>
+      
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Function</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+    <entry><para>sum(x, dim)</para></entry>
+    <entry><para>Calculates sum of elements along given dimension</para></entry>
+  </row>
+  <row>
+    <entry><para>cumsum(x, dim) or x.Cumsum(dim)</para></entry>
+    <entry><para>Calculates cumulative sum of elements along given dimension</para></entry>
+  </row>  
+  <row>
+    <entry><para>prod(x, dim)</para></entry>
+    <entry><para>Calculates product of elements along given dimension</para></entry>
+  </row>   
+  <row>
+    <entry><para>cumprod(x, dim) or x.Cumprod(dim)</para></entry>
+    <entry><para>Calculates cumulative product of elements along given dimension</para></entry>
+  </row>    
+  <row>
+    <entry><para>min(x, dim)</para></entry>
+    <entry><para>Calculates minimum of elements along given dimension</para></entry>
+  </row>   
+  <row>
+    <entry><para>max(x, dim)</para></entry>
+    <entry><para>Calculates maximum of elements along given dimension</para></entry>
+  </row>    
+  <row>
+    <entry><para>mean(x, dim)</para></entry>
+    <entry><para>Calculates mean of elements along given dimension</para></entry>
+  </row>  
+  <row>
+    <entry><para>var(x, dim)</para></entry>
+    <entry><para>Calculates unbiased variance of elements along given dimension</para></entry>
+  </row>    
+  <row>
+    <entry><para>skewness(x, dim)</para></entry>
+    <entry><para>Calculates not corrected for bias skewness of elements along given dimension</para></entry>
+  </row>   
+  <row>
+    <entry><para>kurtosis(x, dim)</para></entry>
+    <entry><para>Calculates not corrected for bias kurtosis of elements along given dimension</para></entry>
+  </row>    
+  <row>
+    <entry><para>quantile(x, q, dim)</para></entry>
+    <entry><para>Calculates requested quantiles q along given dimension</para></entry>
+  </row>    
+  <row>
+    <entry><para>corr(x)</para></entry>
+    <entry><para>Calculates correlation matrix, x is matrix nxp, where n is number of observations and p number of variables in sample</para></entry>
+  </row>    
+  <row>
+    <entry><para>cov(x)</para></entry>
+    <entry><para>Calculates covariance matrix, x is matrix nxp, where n is number of observations and p number of variables in sample</para></entry>
+  </row>    
+</table>
+  
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        open Fmat.Numerics.BasicStat
+        let x = rand [20;30;40]
+        let v = var(x, 1) // calculates row variances, returns matrix 20x40, each sample has 30 elements
+        let q = quantile(x, Matrix([0.05;0.95]), 0) // calculates 5% and 95% quantiles for each column, returns matrix 2x30x40
+        let y = normRnd(0.0, 2.5, [100;5]) // 100 observations, 5 variables
+        let c = corr(y) // correlation between variables, returns matrix 5x5
+        </code>
+        </example>   
+        
+    </introduction>
+   
+    <relatedTopics>
+      <!-- One or more of the following:
+           - A local link
+           - An external link
+           - A code entity reference
+
+      <link xlink:href="Other Topic's ID"/>
+      <link xlink:href="Other Topic's ID">Link inner text</link>
+
+      <externalLink>
+          <linkText>Link text</linkText>
+          <linkAlternateText>Optional alternate link text</linkAlternateText>
+          <linkUri>URI</linkUri>
+      </externalLink>
+
+      <codeEntityReference>API member ID</codeEntityReference>
+
+      Examples:
+
+      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
+      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
+
+      <externalLink>
+          <linkText>SHFB on CodePlex</linkText>
+          <linkAlternateText>Go to CodePlex</linkAlternateText>
+          <linkUri>http://shfb.codeplex.com</linkUri>
+      </externalLink>
+
+      <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
+      <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
+      -->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

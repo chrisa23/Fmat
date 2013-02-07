@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b78f1975-9a78-41b7-9499-6904d896804d" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>In this chapter we discuss how to use arithmetic operators "+", "-", "*", "/" and ".^" or "**" (power) with matrices.</para>
+      
+	<alert class="note">
+	  <para>All code examples below use <application>Matrix</application> type based on <quoteInline>float</quoteInline>, but they will work with any arithmetic type.</para>
+	</alert>
+	
+    </introduction>
+    <section address="Section1">
+      <title>Elementwise arithmetic operators</title>
+      <content>
+        <para>Elementwise operations follow "dot" convention: ".+", ".-", ".*", "./" and ".^". The operator is applied to elements in the same location within a matrix, so matrices must have the same size unless one of the arguments is scalar(scalar value or scalar matrix 1x1) in which case the scalar is applied to each element of the matrix argument.</para>
+        
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = ones [2;3;4]
+        let matrix2 = ones [2;3;4]
+        let res1 = matrix1 .+ matrix2
+        let res1 = matrix1 + matrix2
+        let res2 = matrix1 .- matrix2
+        let res2 = matrix1 - matrix2
+        let res3 = matrix1 .* matrix2
+        let res4 = matrix1 ./ matrix2
+        let res6 = matrix1 ** matrix2
+        </code>
+        </example>   
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix = ones [2;3;4] 
+        let a = 2.0
+        let res1 = matrix .+ a
+        let res1 = matrix + a
+        let res2 = matrix .- a
+        let res2 = matrix - a
+        let res3 = matrix .* a
+        let res3 = matrix * a
+        let res4 = matrix ./ a
+        let res4 = matrix / a
+        let res5 = matrix ** a
+        let res5 = a .^ matrix
+        let b = Matrix(2.0)
+        let res1 = matrix .+ b
+        let res1 = matrix + b
+        let res2 = matrix .- b
+        let res2 = matrix - b
+        let res3 = matrix .* b
+        let res3 = matrix * b
+        let res4 = matrix ./ b   
+        let res4 = matrix / b  
+        let res5 = matrix ** b 
+        let res5 = b .^ matrix 
+        </code>
+        </example>   
+        
+		<alert class="note">
+		  <para>"+" and "-" (without .) are equivalent to ".+" and ".-" so you can use them interchangeably. "*" and "/" are equivalent to ".*" and "./" only if one of the arguments is scalar.</para>
+		</alert>
+
+      </content>
+    </section>
+    
+      <section address="Section1">
+      <title>Matrix multiplication: "*"</title>
+      <content>
+        <para>This operator requires two 2D matrices nxp and pxm</para>
+        <para>Result is a matrix nxm</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = ones [2;3] 
+        let matrix2 = ones [3;4] 
+        let res = matrix1 * matrix2
+        </code>
+        </example>  
+       </content>
+    </section>     
+   
+  </developerConceptualDocument>
+</topic>

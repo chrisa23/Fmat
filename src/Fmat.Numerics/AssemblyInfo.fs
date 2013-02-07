@@ -1,0 +1,8 @@
+﻿module AssemblyInfo
+open System.Reflection
+open System.Runtime.CompilerServices
+open System.Runtime.InteropServices
+
+[<assembly: AssemblyVersion("1.0.0.0")>]
+do()
+

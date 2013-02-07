@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c9ec7545-2e83-46e5-ac61-358005afdea3" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+
+      <para>In this chapter we show how to construct a dense matrix using various constructors and functions.</para>
+     
+	
+	<alert class="note">
+	  <para>All code examples below use <application>Matrix</application> type based on <quoteInline>float</quoteInline>, but they would work in generic case.</para>
+	</alert>
+
+    </introduction>
+    <section address="Section1">
+      <title>Converting .NET array to Fmat <quoteInline>Matrix</quoteInline></title>
+      <content>
+        <para>You can construct a matrix from 1, 2, 3, and 4 dimensional .NET array</para>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = [|1.0;2.0;3.0|] // 1D F# array of float
+        let matrix = Matrix(arr) // Matrix 1x3 (row vector) 
+        </code>
+        </example>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = Array2D.zeroCreate 2 3 // 2D F# array of float
+        let matrix = Matrix(arr) // Matrix 2x3  
+        </code>
+        </example>      
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = Array3D.zeroCreate 2 3 4 // 3D F# array of float
+        let matrix = Matrix(arr) // Matrix 2x3x4  
+        </code>
+        </example>   
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = Array4D.zeroCreate 2 3 4 5 // 4D F# array of float
+        let matrix = Matrix(arr) // Matrix 2x3x4x5  
+        </code>
+        </example>         
+        
+      </content>
+    </section>
+    
+    
+    
+    <section address="Section1">
+      <title>Converting seq&lt;seq&lt;'T&gt;&gt; to Fmat <quoteInline>Matrix</quoteInline></title>
+      <content>
+        <para>You can construct a 2D matrix from sequence of rows, each row being sequence of elements</para>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let m = Matrix([ [1.0;2.0]
+                         [3.0;4.0] ])
+        </code>
+        </example>
+      </content>
+    </section>
+    
+    
+     <section address="Section1">
+      <title>Creating a matrix of given size and filling with given value</title>
+      <content>
+        <para>For special values of zero and one you can use functions:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let matrix1 = zeros [2;3;4] // Matrix 2x3x4 filled with zeros, need type annotation
+        let matrix2 = ones [2;3;4] // Matrix 2x3x4 filled with ones 
+        let matrix1 = Matrix.zeros [2;3;4] // use static method
+        let matrix2 = Matrix.ones [2;3;4] // use static method        
+        </code>
+        </example>  
+        
+       <para>For other values use a constructor:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let matrix = Matrix([2;3;4], 2.0) // Matrix 2x3x4 filled with 2.0
+        </code>
+        </example>        
+       </content>
+    </section>       
+       
+     <section address="Section1">
+      <title>Creating a matrix from a sequence of values</title>
+      <content>
+        <para>As a sequence of values you can use F# array, list or sequence or any other object which implements IEnumerable&lt;'T&gt;</para>
+        <para>If size is specified as input parameter then the sequence of numbers will fill the matrix in column major order. Total number of elements in the sequence must be compatible with matrix size, e.g. for size [2;3] you need exactly 6 elements.</para>
+        <para>If no size is specified then row vector will be created.</para>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = {1.0..4.0} // F# sequence
+        let matrix = Matrix(arr)
+        //result:
+        //1.0 2.0 3.0 4.0
+        </code>
+        </example>  
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = [|1.0;2.0;3.0;4.0|] // F# array
+        let matrix = Matrix([2;2], arr)
+        //result:
+        //1.0 3.0
+        //2.0 4.0
+        </code>
+        </example>  
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let arr = [1.0;2.0;3.0;4.0] // F# list
+        let matrix = Matrix([2;2], arr)
+        //result:
+        //1.0 3.0
+        //2.0 4.0
+        </code>
+        </example>          
+
+        <example>
+        <code lang="F#">
+        let arr = {1.0..4.0} // F# sequence
+        let matrix = Matrix([2;2], arr)
+        //result:
+        //1.0 3.0
+        //2.0 4.0
+        </code>
+        </example>  
+       </content>
+    </section>      
+    
+      <section address="Section1">
+      <title>Creating scalar matrix 1x1</title>
+      <content>
+        <para>You can convert a value into a scalar matrix:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let matrix = Matrix(2.0) // scalar matrix 1x1
+        </code>
+        </example>  
+       </content>
+    </section>     
+    
+      <section address="Section1">
+      <title>Creating identity matrix</title>
+      <content>
+        <para>Identity 2D matrix has generic 1 on main diagonal and generic 0 everywhere else</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatricFunctions
+        let matrix = I(2,3) // identity matrix 2x3, need type annotation
+        let matrix = Matrix.Identity(2,3) // use static method
+        </code>
+        </example>  
+       </content>
+    </section>    
+    
+      <section address="Section1">
+      <title>Creating matrix from boolean matrix</title>
+      <content>
+        <para>Boolean matrix is a result of matrix comparison. You can read more about matrix comparison operators <link xlink:href="a07263b1-a18c-4bad-b7e6-73c0b4b607df">here</link>.</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let m = Matrix([3;3], {1.0..9.0})
+        let boolMatrix = m .> 3.0 // same size as m, each element holds true or false
+        let res = Matrix(boolMatrix) // converts each true to 1 and false to 0
+        </code>
+        </example>  
+       </content>
+    </section>       
+    
+      <section address="Section1">
+      <title>Creating matrix using "!!" operators</title>
+      <content>
+        <para>"!!" operator is defined in <quoteInline>Fmat.Numerics.Conversion</quoteInline> module. It uses explicit cast from 'T to 'S to convert a value from 'T to 'S. Explicit cast must be defined in 'T or 'S </para>
+       
+		<alert class="note">
+		  <para>Type annotation might be needed.</para>
+		</alert>
+
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.Conversion
+        let matrix1 = !![ [1.0;2.0;3.0]
+                          [2.0;3.0]
+                        ] : Matrix
+        let matrix2 = !!2.0 : Matrix
+        </code>
+        </example>  
+       </content>
+    </section>      
+    
+      <section address="Section1">
+      <title>Getting diagonal from existing matrix</title>
+      <content>
+        <para>You can extract diagonal, main or offset up or down, from 2D matrix.</para>
+        <para>Result is a row vector</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m = ones [3;4]
+        let d1 = m.Diag() // main diagonal
+        let d2 = m.Diag(1) // diagonal above main
+        let d3 = m.Diag(-1) // diagonal below main
+        </code>
+        </example>  
+       </content>
+    </section>  
+        
+    
+      <section address="Section1">
+      <title>Getting transposed matrix</title>
+      <content>
+        <para>You can transpose a 2D matrix in place or return a new matrix instance:</para>
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        open Fmat.Numerics.MatrixFunctions
+        let m = ones [3;4]
+        let t1 = m.T // new matrix 4x3
+        let t2 = transpose(m) // new matrix 4x3
+        let t2 = Matrix.transpose(m) // new matrix 4x3, use static method
+        m.Transpose() // in place, m will become 4x3
+        </code>
+        </example>  
+       </content>
+    </section>   
+    
+      <section address="Section1">
+      <title>Create matrix with generating functions</title>
+      <content>
+        
+        <example>
+        <code lang="F#">
+        open Fmat.Numerics
+        let m = Matrix([2;2;2], fun i -> float(i)) // use linear indexing in column major order
+        let m = Matrix([2;2], fun i j -> float(i) + float(j)) //value as function of row and column
+        let m = Matrix([2;2;3], fun i j k -> float(i) + float(j) * float(k))
+        let m = Matrix([2;2;3;4], fun i j k l -> float(i) + float(j) * float(k) + float(l))
+        </code>
+        </example>  
+       </content>
+    </section>  
+    
+  </developerConceptualDocument>
+</topic>
