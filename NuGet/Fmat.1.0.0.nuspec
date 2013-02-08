@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Fmat</id>
+        <version>1.0.0</version>
+        <title />
+        <authors>StatFactory</authors>
+        <owners />
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/Statfactory/Fmat</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Fmat is an open source numerical library written in F#.  It contains types and functions for manipulation of n-dimensional generic matrices, linear algebra, random generators and basic stats.</description>
+        <summary />
+        <copyright>2007-2013 StatFactory Ltd</copyright>
+        <language>en-GB</language>
+        <tags>F# matrix linear algebra</tags>
+    </metadata>
+    <files />
+</package>
